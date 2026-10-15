@@ -1,9 +1,11 @@
 import { Surface } from "@shared/components/Surface";
-import { STEPS } from "../../constants/steps";
+import { PHASES } from "../../engine/tasks";
+import { useAssemblyStore } from "../../store/assemblyStore";
 import styles from "./SceneFallback.module.css";
 
-/** No WebGL (or the GPU dropped it): the lesson still reads as text. */
+/** No WebGL (or the GPU dropped it): the lesson still reads as text, in the real order. */
 export function SceneFallback({ reason }: { reason: "unsupported" | "lost" }) {
+  const tasks = useAssemblyStore((s) => s.tasks);
   return (
     <div className={styles.wrap}>
       <Surface className={styles.card}>
@@ -12,16 +14,25 @@ export function SceneFallback({ reason }: { reason: "unsupported" | "lost" }) {
         </h2>
         <p className={styles.lead}>
           {reason === "lost"
-            ? "Muat ulang halaman untuk mencoba lagi. Urutan langkahnya tetap bisa dibaca di bawah."
-            : "Browser ini tidak menyediakan WebGL. Urutan langkah di simulator tetap bisa dibaca di sini."}
+            ? "Muat ulang halaman untuk mencoba lagi. Urutan merakit untuk rakitanmu tetap bisa dibaca di bawah."
+            : "Browser ini tidak menyediakan WebGL. Urutan merakit untuk rakitanmu tetap bisa dibaca di sini."}
         </p>
-        <ol className={styles.list}>
-          {STEPS.map((s) => (
-            <li key={s.id}>
-              <strong>{s.title}.</strong> {s.hint}
-            </li>
-          ))}
-        </ol>
+        {PHASES.map((phase) => {
+          const items = tasks.filter((t) => t.phase === phase.id);
+          if (!items.length) return null;
+          return (
+            <section key={phase.id}>
+              <h3 className={styles.phase}>{phase.label}</h3>
+              <ol className={styles.list}>
+                {items.map((t) => (
+                  <li key={t.id}>
+                    <strong>{t.title}.</strong> {t.hint}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          );
+        })}
       </Surface>
     </div>
   );

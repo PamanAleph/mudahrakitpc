@@ -1,0 +1,41 @@
+{
+  "note": "VGA generik. Konfigurasi konektor daya mengikuti standar; panjang, tebal, dan daya adalah nilai desain demo.",
+  "items": [
+    {
+      "id": "gpu-slot-power",
+      "name": "VGA Demo kecil (daya dari slot)",
+      "price": 130,
+      "lengthCm": 17,
+      "slots": 2,
+      "powerConnectors": [],
+      "powerW": 70,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "PCI Express, Wikipedia", "url": "https://en.wikipedia.org/wiki/PCI_Express", "note": "Slot x16 grafis menyuplai hingga 75 W." }
+    },
+    {
+      "id": "gpu-8pin",
+      "name": "VGA Demo menengah (1×8-pin)",
+      "price": 300,
+      "lengthCm": 24,
+      "slots": 2,
+      "powerConnectors": [{ "kind": "pcie-8", "count": 1 }],
+      "powerW": 200,
+      "goals": ["gaming"],
+      "verified": false,
+      "source": { "document": "Individual 8-pin vs pigtail, Corsair", "url": "https://www.corsair.com/ww/cs/explorer/diy-builder/power-supply-units/individual-8-pin-vs-pigtail-connectors-for-gpus/", "note": "8-pin hingga 150 W + slot hingga 75 W." }
+    },
+    {
+      "id": "gpu-12v2x6",
+      "name": "VGA Demo besar (12V-2x6)",
+      "price": 700,
+      "lengthCm": 33,
+      "slots": 3,
+      "powerConnectors": [{ "kind": "12v-2x6", "count": 1 }],
+      "powerW": 350,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "12V-2x6 compatibility, Hardware Busters", "url": "https://hwbusters.com/gpu/will-my-atx-v3-0-psu-or-my-gpu-be-compatible-with-12v-2x6-do-i-need-a-new-cable-psu-gpu-everything-you-need-to-know/" }
+    }
+  ]
+}

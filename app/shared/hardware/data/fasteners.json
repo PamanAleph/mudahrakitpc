@@ -1,0 +1,24 @@
+{
+  "bits": [
+    { "id": "PH0", "label": "PH0", "order": 0 },
+    { "id": "PH1", "label": "PH1", "order": 1 },
+    { "id": "PH2", "label": "PH2", "order": 2 }
+  ],
+  "screws": [
+    { "id": "thumbscrew-6-32", "name": "Baut panel samping", "thread": "6-32 UNC", "head": "thumbscrew-phillips", "bit": "PH2", "turnsToRemove": 6 },
+    { "id": "board-6-32", "name": "Baut motherboard", "thread": "6-32 UNC", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 5 },
+    { "id": "psu-6-32", "name": "Baut PSU", "thread": "6-32 UNC", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 5 },
+    { "id": "bracket-6-32", "name": "Baut bracket VGA", "thread": "6-32 UNC", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 5 },
+    { "id": "hdd-6-32", "name": "Baut HDD 3.5\"", "thread": "6-32 UNC", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 5 },
+    { "id": "ssd-m3", "name": "Baut drive 2.5\"", "thread": "M3", "head": "pan-phillips", "bit": "PH1", "turnsToRemove": 5 },
+    { "id": "m2-screw", "name": "Baut M.2", "thread": "M2", "head": "pan-phillips", "bit": "PH1", "turnsToRemove": 4 },
+    { "id": "fan-screw", "name": "Baut kipas", "thread": "self-tapping", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 6 },
+    { "id": "cooler-screw", "name": "Baut cooler", "thread": "per kit mounting", "head": "pan-phillips", "bit": "PH2", "turnsToRemove": 6 }
+  ],
+  "verified": false,
+  "source": {
+    "document": "Computer case screws, Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Computer_case_screws",
+    "note": "Ulir 6-32 dan M3 dari sumber ini (banyak pengecualian). Ukuran mata obeng per baut dan baut M.2, kipas, cooler: [BELUM DIKONFIRMASI]."
+  }
+}

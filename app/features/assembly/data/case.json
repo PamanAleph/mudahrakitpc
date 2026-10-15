@@ -1,9 +1,0 @@
-{
-  "id": "case-atx-mid-demo",
-  "name": "Casing ATX Demo",
-  "supportedFormFactors": ["ATX", "Micro-ATX", "Mini-ITX"],
-  "dimensionsCm": { "length": 46, "depth": 44, "width": 21 },
-  "sidePanel": { "material": "tempered-glass", "screwCount": 4, "screwId": "thumbscrew-6-32" },
-  "verified": false,
-  "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Casing generik. Ukuran luar perkiraan untuk casing mid-tower." }
-}

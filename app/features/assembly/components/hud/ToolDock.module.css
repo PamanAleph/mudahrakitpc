@@ -19,3 +19,19 @@
     display: none;
   }
 }
+
+@media (max-width: 720px) {
+  .label {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .dock {
+    gap: var(--space-1);
+  }
+  .dock > button {
+    min-width: var(--size-touch-min);
+    padding: 0 12px;
+  }
+}

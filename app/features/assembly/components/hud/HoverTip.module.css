@@ -12,3 +12,11 @@
   pointer-events: none;
   z-index: var(--layer-tooltip);
 }
+
+.tip[data-tone="ok"] {
+  background: var(--color-feedback-success);
+}
+
+.tip[data-tone="bad"] {
+  background: var(--color-feedback-danger);
+}

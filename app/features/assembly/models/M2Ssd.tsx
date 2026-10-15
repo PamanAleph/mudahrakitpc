@@ -1,25 +1,31 @@
 import { useMemo } from "react";
 import { MeshStandardMaterial } from "three";
-import { SSD_BOARD } from "../constants/sceneLayout";
-import { HARDWARE } from "../services/hardwareSpec";
+import type { StorageSpec } from "@shared/hardware";
 import { m2BoardGeometry } from "../utils/geometryFactory";
 import { goldFingerTexture, stickerTexture } from "../utils/proceduralTextures";
 import { MATERIALS } from "./materials";
 import { Box } from "./primitives";
 
+export const M2_WIDTH = 2.2;
+export const M2_THICKNESS = 0.08;
+
+/** "2280" → 8.0 cm: the last two digits of the M.2 size code are the length in mm. */
+export const m2LengthCm = (code: number | undefined) => ((code ?? 2280) % 100) / 10;
+
 /**
- * M.2 2280 NVMe card. Origin at the middle of the contact edge, card
- * extending along +z, bottom face at y = 0.
+ * M.2 card. Origin: middle of the contact edge, card extending along +z,
+ * bottom face at y = 0. B+M cards show both notches (visual approximation of
+ * the key positions, [BELUM DIKONFIRMASI]); the fit rule reads m2Key from data.
  */
-export function M2Ssd({ pcbMaterial }: { pcbMaterial: MeshStandardMaterial }) {
-  const { width, length, thickness } = SSD_BOARD;
-  // M-key notch sits off-centre; visual approximation.
-  const board = m2BoardGeometry(width, length, thickness, -0.62);
+export function M2Ssd({ spec }: { spec: StorageSpec }) {
+  const length = m2LengthCm(spec.m2Length);
+  const board = m2BoardGeometry(M2_WIDTH, length, M2_THICKNESS, -0.62);
+  const sata = spec.interface === "sata";
 
   const mats = useMemo(() => {
     const fingerMat = new MeshStandardMaterial({ map: goldFingerTexture(30), metalness: 0.9, roughness: 0.28 });
     const label = new MeshStandardMaterial({
-      map: stickerTexture("ssd", [`NVMe · M.2 ${HARDWARE.ssd.formFactor}`, HARDWARE.ssd.name.toUpperCase(), `${HARDWARE.ssd.key}-KEY · PCIe`], {
+      map: stickerTexture(`m2:${spec.id}`, [sata ? "M.2 SATA" : "M.2 NVMe", `${spec.m2Length ?? ""} · ${spec.m2Key ?? "M"}`, sata ? "SATA 6Gb/s" : "PCIe x4"], {
         width: 256,
         height: 512,
         dark: true,
@@ -27,21 +33,20 @@ export function M2Ssd({ pcbMaterial }: { pcbMaterial: MeshStandardMaterial }) {
       roughness: 0.55,
     });
     return { fingerMat, label };
-  }, []);
+  }, [spec.id, spec.m2Length, spec.m2Key, sata]);
 
   return (
     <group>
-      <mesh geometry={board} material={pcbMaterial} />
-      <mesh position={[0, thickness + 0.002, 0.2]} rotation={[-Math.PI / 2, 0, 0]} material={mats.fingerMat}>
-        <planeGeometry args={[width - 0.2, 0.34]} />
+      <mesh geometry={board} material={MATERIALS.ssdPcb} />
+      {spec.m2Key === "B+M" ? <Box size={[0.13, M2_THICKNESS + 0.02, 0.42]} position={[0.55, M2_THICKNESS / 2, 0.2]} material={MATERIALS.chip} /> : null}
+      <mesh position={[0, M2_THICKNESS + 0.002, 0.2]} rotation={[-Math.PI / 2, 0, 0]} material={mats.fingerMat}>
+        <planeGeometry args={[M2_WIDTH - 0.2, 0.34]} />
       </mesh>
-      {/* Controller, DRAM cache, NAND packages under the label */}
-      <Box size={[1.2, 0.12, 1.2]} position={[0, thickness + 0.06, 1.3]} material={MATERIALS.chip} />
-      <Box size={[0.9, 0.1, 0.7]} position={[0, thickness + 0.05, 2.4]} material={MATERIALS.chip} />
-      <Box size={[1.6, 0.14, 1.8]} position={[0, thickness + 0.07, 4.0]} material={MATERIALS.chip} />
-      <Box size={[1.6, 0.14, 1.8]} position={[0, thickness + 0.07, 6.1]} material={MATERIALS.chip} />
-      <mesh position={[0, thickness + 0.155, 4.3]} rotation={[-Math.PI / 2, 0, 0]} material={mats.label}>
-        <planeGeometry args={[width - 0.15, 6.2]} />
+      <Box size={[1.2, 0.12, 1.2]} position={[0, M2_THICKNESS + 0.06, 1.3]} material={MATERIALS.chip} />
+      <Box size={[1.6, 0.14, Math.min(1.8, length * 0.22)]} position={[0, M2_THICKNESS + 0.07, length * 0.5]} material={MATERIALS.chip} />
+      {length > 5 ? <Box size={[1.6, 0.14, 1.8]} position={[0, M2_THICKNESS + 0.07, length * 0.76]} material={MATERIALS.chip} /> : null}
+      <mesh position={[0, M2_THICKNESS + 0.155, length * 0.55]} rotation={[-Math.PI / 2, 0, 0]} material={mats.label}>
+        <planeGeometry args={[M2_WIDTH - 0.15, length * 0.75]} />
       </mesh>
     </group>
   );

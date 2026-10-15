@@ -1,0 +1,44 @@
+{
+  "note": "Kit RAM generik.",
+  "items": [
+    {
+      "id": "ram-ddr5-2x16",
+      "name": "RAM DDR5 2×16 GB Demo",
+      "price": 90,
+      "type": "DDR5",
+      "sticks": 2,
+      "capacityGbPerStick": 16,
+      "heightCm": 4.4,
+      "powerW": 10,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "DDR5 SDRAM, Wikipedia", "url": "https://en.wikipedia.org/wiki/DDR5_SDRAM", "note": "288 pin, 1,1 V. Tinggi heat spreader nilai desain." }
+    },
+    {
+      "id": "ram-ddr5-1x16-lp",
+      "name": "RAM DDR5 1×16 GB Low-Profile Demo",
+      "price": 45,
+      "type": "DDR5",
+      "sticks": 1,
+      "capacityGbPerStick": 16,
+      "heightCm": 3.2,
+      "powerW": 5,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "DDR5 SDRAM, Wikipedia", "url": "https://en.wikipedia.org/wiki/DDR5_SDRAM" }
+    },
+    {
+      "id": "ram-ddr4-2x8",
+      "name": "RAM DDR4 2×8 GB Demo",
+      "price": 40,
+      "type": "DDR4",
+      "sticks": 2,
+      "capacityGbPerStick": 8,
+      "heightCm": 3.3,
+      "powerW": 8,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "DDR5 SDRAM, Wikipedia", "url": "https://en.wikipedia.org/wiki/DDR5_SDRAM", "note": "DDR4 1,2 V." }
+    }
+  ]
+}

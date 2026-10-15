@@ -1,0 +1,312 @@
+{
+  "note": "Casing generik untuk simulator. Ukuran dan batas adalah nilai desain casing demo, bukan produk nyata.",
+  "items": [
+    {
+      "id": "case-mid-atx",
+      "name": "Casing Mid-Tower ATX Demo",
+      "price": 120,
+      "formFactors": [
+        "ATX",
+        "Micro-ATX",
+        "Mini-ITX"
+      ],
+      "dimensionsCm": {
+        "length": 46,
+        "depth": 44,
+        "width": 21
+      },
+      "psuFormFactor": "ATX",
+      "expansionSlots": 7,
+      "gpuMaxLengthCm": 36,
+      "coolerMaxHeightCm": 16.5,
+      "fanMounts": [
+        {
+          "id": "front-1",
+          "side": "front",
+          "sizes": [
+            120,
+            140
+          ],
+          "u": 8,
+          "v": 10.5
+        },
+        {
+          "id": "front-2",
+          "side": "front",
+          "sizes": [
+            120,
+            140
+          ],
+          "u": -6,
+          "v": 10.5
+        },
+        {
+          "id": "rear-1",
+          "side": "rear",
+          "sizes": [
+            120
+          ],
+          "u": 16,
+          "v": 11.6
+        },
+        {
+          "id": "top-1",
+          "side": "top",
+          "sizes": [
+            120,
+            140
+          ],
+          "u": -6,
+          "v": 10.5
+        },
+        {
+          "id": "top-2",
+          "side": "top",
+          "sizes": [
+            120,
+            140
+          ],
+          "u": 8,
+          "v": 10.5
+        }
+      ],
+      "driveBays": [
+        {
+          "id": "bay25-1",
+          "kind": "2.5",
+          "x": -8,
+          "z": 15
+        },
+        {
+          "id": "bay25-2",
+          "kind": "2.5",
+          "x": 6,
+          "z": 15
+        },
+        {
+          "id": "bay35-1",
+          "kind": "3.5",
+          "x": -17.5,
+          "z": 13
+        }
+      ],
+      "boardAnchor": {
+        "x": 17.2,
+        "z": -20.5
+      },
+      "grommets": [
+        {
+          "id": "g-front-1",
+          "x": -6,
+          "z": 6.4
+        },
+        {
+          "id": "g-front-2",
+          "x": 4,
+          "z": 6.4
+        },
+        {
+          "id": "g-front-3",
+          "x": 13,
+          "z": 6.4
+        },
+        {
+          "id": "g-top",
+          "x": 19.4,
+          "z": -15
+        }
+      ],
+      "frontIO": {
+        "usb3": true,
+        "usbc": true,
+        "audio": true
+      },
+      "panelScrewId": "thumbscrew-6-32",
+      "powerW": 0,
+      "goals": [
+        "office",
+        "gaming",
+        "editing"
+      ],
+      "verified": false,
+      "source": {
+        "document": "[BELUM DIKONFIRMASI]",
+        "note": "Nilai desain casing demo."
+      }
+    },
+    {
+      "id": "case-mini-matx",
+      "name": "Casing Mini-Tower mATX Demo",
+      "price": 80,
+      "formFactors": [
+        "Micro-ATX",
+        "Mini-ITX"
+      ],
+      "dimensionsCm": {
+        "length": 40,
+        "depth": 38,
+        "width": 20
+      },
+      "psuFormFactor": "ATX",
+      "expansionSlots": 4,
+      "gpuMaxLengthCm": 30,
+      "coolerMaxHeightCm": 15.5,
+      "fanMounts": [
+        {
+          "id": "front-1",
+          "side": "front",
+          "sizes": [
+            120
+          ],
+          "u": 6,
+          "v": 10
+        },
+        {
+          "id": "front-2",
+          "side": "front",
+          "sizes": [
+            120
+          ],
+          "u": -7,
+          "v": 10
+        },
+        {
+          "id": "rear-1",
+          "side": "rear",
+          "sizes": [
+            120
+          ],
+          "u": 13,
+          "v": 11
+        }
+      ],
+      "driveBays": [
+        {
+          "id": "bay25-1",
+          "kind": "2.5",
+          "x": -2,
+          "z": 12.5
+        },
+        {
+          "id": "bay35-1",
+          "kind": "3.5",
+          "x": -14.5,
+          "z": 10.5
+        }
+      ],
+      "boardAnchor": {
+        "x": 13.9,
+        "z": -17.5
+      },
+      "grommets": [
+        {
+          "id": "g-front-1",
+          "x": -3,
+          "z": 6
+        },
+        {
+          "id": "g-front-2",
+          "x": 7,
+          "z": 6
+        },
+        {
+          "id": "g-top",
+          "x": 16.5,
+          "z": -13
+        }
+      ],
+      "frontIO": {
+        "usb3": true,
+        "usbc": false,
+        "audio": true
+      },
+      "panelScrewId": "thumbscrew-6-32",
+      "powerW": 0,
+      "goals": [
+        "office",
+        "gaming"
+      ],
+      "verified": false,
+      "source": {
+        "document": "[BELUM DIKONFIRMASI]",
+        "note": "Nilai desain casing demo."
+      }
+    },
+    {
+      "id": "case-itx",
+      "name": "Casing Mini-ITX Demo",
+      "price": 100,
+      "formFactors": [
+        "Mini-ITX"
+      ],
+      "dimensionsCm": {
+        "length": 34,
+        "depth": 32,
+        "width": 19
+      },
+      "psuFormFactor": "SFX",
+      "expansionSlots": 2,
+      "gpuMaxLengthCm": 26,
+      "coolerMaxHeightCm": 6.5,
+      "fanMounts": [
+        {
+          "id": "rear-1",
+          "side": "rear",
+          "sizes": [
+            120
+          ],
+          "u": 8,
+          "v": 10.5
+        },
+        {
+          "id": "top-1",
+          "side": "top",
+          "sizes": [
+            120
+          ],
+          "u": 2,
+          "v": 10
+        }
+      ],
+      "driveBays": [
+        {
+          "id": "bay25-1",
+          "kind": "2.5",
+          "x": -9,
+          "z": 10.5
+        }
+      ],
+      "boardAnchor": {
+        "x": 13.5,
+        "z": -14
+      },
+      "grommets": [
+        {
+          "id": "g-front-1",
+          "x": 4,
+          "z": 5
+        },
+        {
+          "id": "g-top",
+          "x": 14.5,
+          "z": -10
+        }
+      ],
+      "frontIO": {
+        "usb3": false,
+        "usbc": true,
+        "audio": true
+      },
+      "panelScrewId": "thumbscrew-6-32",
+      "powerW": 0,
+      "goals": [
+        "office"
+      ],
+      "verified": false,
+      "source": {
+        "document": "[BELUM DIKONFIRMASI]",
+        "note": "Nilai desain casing demo."
+      }
+    }
+  ]
+}

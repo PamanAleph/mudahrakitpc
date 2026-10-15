@@ -1,0 +1,47 @@
+{
+  "note": "PSU generik. Daftar konektor mengikuti standar ATX; watt dan jumlah konektor adalah desain demo.",
+  "items": [
+    {
+      "id": "psu-atx-550",
+      "name": "PSU ATX 550 W Demo (non-modular)",
+      "price": 55,
+      "formFactor": "ATX",
+      "watt": 550,
+      "modular": "none",
+      "atxVersion": "2.x",
+      "outputs": { "atx24": 1, "eps": 1, "pcie8": 2, "12v2x6": 0, "sataPower": 4, "molex": 2 },
+      "powerW": 0,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "Power supply unit (computer), Wikipedia", "url": "https://en.wikipedia.org/wiki/Power_supply_unit_(computer)", "note": "Ukuran ATX12V 150 × 86 × 140 mm." }
+    },
+    {
+      "id": "psu-atx-850",
+      "name": "PSU ATX 850 W Demo (modular, ATX 3.1)",
+      "price": 120,
+      "formFactor": "ATX",
+      "watt": 850,
+      "modular": "full",
+      "atxVersion": "3.1",
+      "outputs": { "atx24": 1, "eps": 2, "pcie8": 4, "12v2x6": 1, "sataPower": 8, "molex": 2 },
+      "powerW": 0,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "12V-2x6 compatibility, Hardware Busters", "url": "https://hwbusters.com/gpu/will-my-atx-v3-0-psu-or-my-gpu-be-compatible-with-12v-2x6-do-i-need-a-new-cable-psu-gpu-everything-you-need-to-know/" }
+    },
+    {
+      "id": "psu-sfx-650",
+      "name": "PSU SFX 650 W Demo (modular)",
+      "price": 110,
+      "formFactor": "SFX",
+      "watt": 650,
+      "modular": "full",
+      "atxVersion": "3.1",
+      "outputs": { "atx24": 1, "eps": 1, "pcie8": 2, "12v2x6": 1, "sataPower": 4, "molex": 0 },
+      "powerW": 0,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "Power supply unit (computer), Wikipedia", "url": "https://en.wikipedia.org/wiki/Power_supply_unit_(computer)", "note": "Ukuran SFX12V 125 × 63,5 × 100 mm." }
+    }
+  ]
+}

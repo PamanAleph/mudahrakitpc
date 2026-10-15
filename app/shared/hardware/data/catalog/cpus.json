@@ -1,0 +1,57 @@
+{
+  "note": "CPU generik. Socket, bentuk paket, dan ada/tidaknya grafis terintegrasi mengikuti platform nyata; daya adalah nilai desain demo.",
+  "items": [
+    {
+      "id": "cpu-lga1700",
+      "name": "CPU Demo (LGA1700)",
+      "price": 160,
+      "socket": "LGA1700",
+      "packageMm": { "width": 37.5, "length": 45 },
+      "contacts": "socket",
+      "integratedGraphics": true,
+      "powerW": 125,
+      "goals": ["gaming", "office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran paket LGA1700 37,5 × 45 mm perlu dicek ke datasheet Intel." }
+    },
+    {
+      "id": "cpu-lga1851",
+      "name": "CPU Demo (LGA1851)",
+      "price": 200,
+      "socket": "LGA1851",
+      "packageMm": { "width": 37.5, "length": 45 },
+      "contacts": "socket",
+      "integratedGraphics": true,
+      "powerW": 125,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Intel: LGA1700 dan LGA1851 tidak bisa saling tukar prosesor." }
+    },
+    {
+      "id": "cpu-am5",
+      "name": "CPU Demo (AM5)",
+      "price": 220,
+      "socket": "AM5",
+      "packageMm": { "width": 40, "length": 40 },
+      "contacts": "socket",
+      "integratedGraphics": true,
+      "powerW": 105,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "AM5 adalah LGA; cek ukuran paket ke datasheet AMD." }
+    },
+    {
+      "id": "cpu-am4-f",
+      "name": "CPU Demo tanpa grafis (AM4)",
+      "price": 90,
+      "socket": "AM4",
+      "packageMm": { "width": 40, "length": 40 },
+      "contacts": "cpu",
+      "integratedGraphics": false,
+      "powerW": 65,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "AM4 memakai pin di CPU (PGA); cek ke datasheet AMD." }
+    }
+  ]
+}

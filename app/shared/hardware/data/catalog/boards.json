@@ -1,0 +1,114 @@
+{
+  "note": "Board generik. Jumlah slot dan header adalah desain board demo; posisi fisik ada di layout fitur assembly dan belum dicek ke manual.",
+  "items": [
+    {
+      "id": "board-atx-1700",
+      "name": "Board ATX Demo (LGA1700)",
+      "price": 190,
+      "formFactor": "ATX",
+      "socket": "LGA1700",
+      "ramType": "DDR5",
+      "ramSlots": [
+        { "id": "A1", "channel": "A" },
+        { "id": "A2", "channel": "A" },
+        { "id": "B1", "channel": "B" },
+        { "id": "B2", "channel": "B" }
+      ],
+      "recommendedRamSlots": { "1": ["A2"], "2": ["A2", "B2"], "4": ["A1", "A2", "B1", "B2"] },
+      "pcieSlots": [
+        { "id": "PCIE1", "kind": "pcie-x16", "lanes": 16 },
+        { "id": "PCIE2", "kind": "pcie-x1", "lanes": 1 },
+        { "id": "PCIE3", "kind": "pcie-x16", "lanes": 4 }
+      ],
+      "m2Slots": [
+        { "id": "M2_1", "key": "M", "interfaces": ["pcie"], "lengths": [2242, 2260, 2280], "disablesSata": [] },
+        { "id": "M2_2", "key": "M", "interfaces": ["pcie", "sata"], "lengths": [2242, 2260, 2280], "disablesSata": ["SATA2"] }
+      ],
+      "sataPorts": ["SATA1", "SATA2", "SATA3", "SATA4"],
+      "headers": { "eps": 1, "cpuFan": 1, "sysFan": 3, "frontPanel": "fp-intel", "usb3": 1, "usbc": 1, "usb2": 1, "audio": 1 },
+      "integratedIoShield": true,
+      "debugLeds": true,
+      "powerW": 50,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran ATX 30,5 × 24,4 cm dari Wikipedia (Motherboard form factor)." }
+    },
+    {
+      "id": "board-matx-am5",
+      "name": "Board mATX Demo (AM5)",
+      "price": 140,
+      "formFactor": "Micro-ATX",
+      "socket": "AM5",
+      "ramType": "DDR5",
+      "ramSlots": [
+        { "id": "A2", "channel": "A" },
+        { "id": "B2", "channel": "B" }
+      ],
+      "recommendedRamSlots": { "1": ["A2"], "2": ["A2", "B2"] },
+      "pcieSlots": [
+        { "id": "PCIE1", "kind": "pcie-x16", "lanes": 16 },
+        { "id": "PCIE2", "kind": "pcie-x1", "lanes": 1 }
+      ],
+      "m2Slots": [{ "id": "M2_1", "key": "M", "interfaces": ["pcie"], "lengths": [2242, 2260, 2280], "disablesSata": [] }],
+      "sataPorts": ["SATA1", "SATA2", "SATA3", "SATA4"],
+      "headers": { "eps": 1, "cpuFan": 1, "sysFan": 2, "frontPanel": "fp-intel", "usb3": 1, "usbc": 0, "usb2": 1, "audio": 1 },
+      "integratedIoShield": false,
+      "debugLeds": true,
+      "powerW": 40,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran Micro-ATX 24,4 × 24,4 cm dari Wikipedia (Motherboard form factor)." }
+    },
+    {
+      "id": "board-itx-1851",
+      "name": "Board Mini-ITX Demo (LGA1851)",
+      "price": 200,
+      "formFactor": "Mini-ITX",
+      "socket": "LGA1851",
+      "ramType": "DDR5",
+      "ramSlots": [
+        { "id": "A1", "channel": "A" },
+        { "id": "B1", "channel": "B" }
+      ],
+      "recommendedRamSlots": { "1": ["A1"], "2": ["A1", "B1"] },
+      "pcieSlots": [{ "id": "PCIE1", "kind": "pcie-x16", "lanes": 16 }],
+      "m2Slots": [{ "id": "M2_1", "key": "M", "interfaces": ["pcie"], "lengths": [2242, 2260, 2280], "disablesSata": [] }],
+      "sataPorts": ["SATA1", "SATA2"],
+      "headers": { "eps": 1, "cpuFan": 1, "sysFan": 1, "frontPanel": "fp-intel", "usb3": 1, "usbc": 1, "usb2": 0, "audio": 1 },
+      "integratedIoShield": true,
+      "debugLeds": true,
+      "powerW": 40,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran Mini-ITX 17 × 17 cm dari Wikipedia (Motherboard form factor)." }
+    },
+    {
+      "id": "board-matx-am4",
+      "name": "Board mATX Demo DDR4 (AM4)",
+      "price": 90,
+      "formFactor": "Micro-ATX",
+      "socket": "AM4",
+      "ramType": "DDR4",
+      "ramSlots": [
+        { "id": "A1", "channel": "A" },
+        { "id": "A2", "channel": "A" },
+        { "id": "B1", "channel": "B" },
+        { "id": "B2", "channel": "B" }
+      ],
+      "recommendedRamSlots": { "1": ["A2"], "2": ["A2", "B2"], "4": ["A1", "A2", "B1", "B2"] },
+      "pcieSlots": [
+        { "id": "PCIE1", "kind": "pcie-x16", "lanes": 16 },
+        { "id": "PCIE2", "kind": "pcie-x1", "lanes": 1 }
+      ],
+      "m2Slots": [{ "id": "M2_1", "key": "M", "interfaces": ["pcie", "sata"], "lengths": [2242, 2260, 2280], "disablesSata": [] }],
+      "sataPorts": ["SATA1", "SATA2", "SATA3", "SATA4"],
+      "headers": { "eps": 1, "cpuFan": 1, "sysFan": 2, "frontPanel": "fp-intel", "usb3": 1, "usbc": 0, "usb2": 1, "audio": 1 },
+      "integratedIoShield": false,
+      "debugLeds": false,
+      "powerW": 35,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran Micro-ATX 24,4 × 24,4 cm dari Wikipedia (Motherboard form factor)." }
+    }
+  ]
+}

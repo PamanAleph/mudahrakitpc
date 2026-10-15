@@ -1,0 +1,38 @@
+{
+  "note": "Kipas casing generik.",
+  "items": [
+    {
+      "id": "fan-120-dc",
+      "name": "Kipas 120 mm 3-pin Demo",
+      "price": 6,
+      "sizeMm": 120,
+      "connector": "fan-3pin",
+      "powerW": 2,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]" }
+    },
+    {
+      "id": "fan-120-pwm",
+      "name": "Kipas 120 mm PWM Demo",
+      "price": 10,
+      "sizeMm": 120,
+      "connector": "fan-4pin",
+      "powerW": 2,
+      "goals": ["gaming", "editing", "office"],
+      "verified": false,
+      "source": { "document": "PWM specifications, Noctua", "url": "https://cdn.noctua.at/preview/media/Noctua_PWM_specifications_white_paper.pdf" }
+    },
+    {
+      "id": "fan-140-pwm",
+      "name": "Kipas 140 mm PWM Demo",
+      "price": 14,
+      "sizeMm": 140,
+      "connector": "fan-4pin",
+      "powerW": 3,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "PWM specifications, Noctua", "url": "https://cdn.noctua.at/preview/media/Noctua_PWM_specifications_white_paper.pdf" }
+    }
+  ]
+}

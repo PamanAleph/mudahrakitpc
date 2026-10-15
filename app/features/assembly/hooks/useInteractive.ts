@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { DRAG_THRESHOLD_PX, TAP_MAX_MS } from "../constants/timings";
 import { readAssembly } from "../store/assemblyStore";
 import type { Anchor, HoldDefinition } from "../types/assemblyTypes";
-import { setCameraControlsEnabled } from "../utils/interactionRuntime";
+import { runtime, setCameraControlsEnabled } from "../utils/runtime";
 
 interface InteractiveOptions {
   id: string;
@@ -18,6 +18,11 @@ interface InteractiveOptions {
    */
   getHold?: () => HoldDefinition | null | "handled";
   onTap?: () => void;
+  /**
+   * "Other hand" controls (latches, lever, switches): their tap runs even while
+   * a part or cable is in hand. Everything else turns a tap into "place it here".
+   */
+  priority?: boolean;
 }
 
 /**
@@ -25,7 +30,7 @@ interface InteractiveOptions {
  * tap = pick / toggle, hold = press / turn, drag on empty space = camera.
  * While a part is in hand, any tap tries to place it first.
  */
-export function useInteractive({ id, label, enabled = true, anchor, getHold, onTap }: InteractiveOptions) {
+export function useInteractive({ id, label, enabled = true, anchor, getHold, onTap, priority = false }: InteractiveOptions) {
   const [hovered, setHovered] = useState(false);
   useCursor(hovered && enabled, "pointer", "auto");
   const press = useRef<{ x: number; y: number; t: number; moved: boolean; holding: boolean; consumed: boolean } | null>(
@@ -53,13 +58,13 @@ export function useInteractive({ id, label, enabled = true, anchor, getHold, onT
       }
       if (p.moved || p.consumed) return;
       const s = readAssembly();
-      if (s.held && s.snap) {
+      if (s.held && !priority) {
         s.placeHeld();
         return;
       }
       onTap?.();
     },
-    [onTap],
+    [onTap, priority],
   );
 
   // Window listeners need stable identities that read the latest `finish`.
@@ -79,7 +84,14 @@ export function useInteractive({ id, label, enabled = true, anchor, getHold, onT
       setHovered(true);
       readAssembly().setHover({ id, label: label(), anchor: anchor?.() ?? null });
     },
+    onPointerMove: (e: ThreeEvent<PointerEvent>) => {
+      if (!enabled) return;
+      e.stopPropagation();
+      Object.assign(runtime.hitPoint, { x: e.point.x, y: e.point.y, z: e.point.z });
+      runtime.hitValid = true;
+    },
     onPointerOut: () => {
+      runtime.hitValid = false;
       setHovered(false);
       const s = readAssembly();
       if (s.hover?.id === id) s.setHover(null);
@@ -89,6 +101,8 @@ export function useInteractive({ id, label, enabled = true, anchor, getHold, onT
       if (e.nativeEvent.pointerType === "mouse" && e.nativeEvent.button !== 0) return;
       e.stopPropagation();
       setCameraControlsEnabled(false);
+      Object.assign(runtime.hitPoint, { x: e.point.x, y: e.point.y, z: e.point.z });
+      runtime.hitValid = true;
       // Touch has no hover, so refresh the label/anchor on press.
       readAssembly().setHover({ id, label: label(), anchor: anchor?.() ?? null });
       press.current = { x: e.nativeEvent.clientX, y: e.nativeEvent.clientY, t: performance.now(), moved: false, holding: false, consumed: false };
@@ -96,7 +110,7 @@ export function useInteractive({ id, label, enabled = true, anchor, getHold, onT
       window.addEventListener("pointerup", onUp);
       window.addEventListener("pointercancel", onCancel);
       const s = readAssembly();
-      if (s.held && s.snap) return; // a placement tap, handled on release
+      if (s.held && !priority) return; // a placement tap, handled on release
       const def = getHold?.();
       if (def === "handled") {
         press.current.consumed = true;

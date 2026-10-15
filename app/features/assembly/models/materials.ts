@@ -1,4 +1,4 @@
-import { DoubleSide, MeshPhysicalMaterial, MeshStandardMaterial } from "three";
+import { Color, DoubleSide, MeshPhysicalMaterial, MeshStandardMaterial } from "three";
 
 /**
  * Shared materials for every part model. Visual layer only: colours here are
@@ -8,7 +8,7 @@ const std = (color: string, metalness: number, roughness: number, extra: Partial
   Object.assign(new MeshStandardMaterial({ color, metalness, roughness }), extra);
 
 export const MATERIALS = {
-  caseSteel: std("#25272b", 0.55, 0.45),
+  caseSteel: std("#30333a", 0.55, 0.42),
   caseSteelInner: std("#2d3035", 0.5, 0.55),
   caseSteelPerforated: std("#25272b", 0.55, 0.45, { alphaTest: 0.5, side: DoubleSide }),
   bezelPlastic: std("#1b1c1f", 0.05, 0.6),
@@ -56,4 +56,30 @@ export const MATERIALS = {
   knurl: std("#b8bcc2", 0.9, 0.3, { flatShading: true }),
   gripRubber: std("#16171a", 0, 0.85),
   handleGrip: std("#2346c8", 0.05, 0.55, { flatShading: true }),
+
+  socketPlastic: std("#2b2d31", 0.05, 0.5),
+  loadingPlate: std("#b4b8be", 0.9, 0.3),
+  substrate: std("#2c5a3c", 0.1, 0.55),
+  copper: std("#b87a4b", 0.9, 0.3),
+  paste: std("#a9adb3", 0.2, 0.35),
+  film: new MeshPhysicalMaterial({ color: "#dfe7ef", roughness: 0.15, transparent: true, opacity: 0.55, depthWrite: false }),
+  psuBody: std("#1c1d20", 0.45, 0.5),
+  gpuShroud: std("#24262b", 0.2, 0.45),
+  gpuBackplate: std("#30333a", 0.7, 0.35),
+  driveBody: std("#9ba1a8", 0.85, 0.35),
+  driveDark: std("#2a2c30", 0.5, 0.45),
+  plug: std("#151618", 0.02, 0.6),
+  plugLight: std("#d9d6cd", 0.02, 0.5),
+  cableBlack: std("#121315", 0.05, 0.6),
+  cableRed: std("#a3271c", 0.05, 0.5),
+  cableGrey: std("#7d8188", 0.05, 0.5),
+  monitorBody: std("#202226", 0.3, 0.5),
+  ledOff: std("#3a2a1a", 0.1, 0.5),
+  ledOn: std("#ffb347", 0, 0.4, { emissive: new Color("#ff9c2a"), emissiveIntensity: 2.2 }),
+  ledGreen: std("#5ecb88", 0, 0.4, { emissive: new Color("#2fb463"), emissiveIntensity: 1.6 }),
+  cardboard: std("#b9a27f", 0, 0.85),
+  bag: new MeshPhysicalMaterial({ color: "#8b9097", metalness: 0.6, roughness: 0.35, transparent: true, opacity: 0.85 }),
+  strapBand: std("#2e3238", 0.05, 0.75),
+  syringe: new MeshPhysicalMaterial({ color: "#e6e8ea", roughness: 0.2, transparent: true, opacity: 0.8 }),
+  standoff: std("#c9a35b", 0.85, 0.32),
 } as const;

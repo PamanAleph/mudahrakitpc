@@ -1,0 +1,69 @@
+{
+  "note": "Storage generik. Ukuran M.2 dan key mengikuti standar.",
+  "items": [
+    {
+      "id": "ssd-m2-nvme",
+      "name": "SSD M.2 NVMe 1 TB Demo",
+      "price": 70,
+      "kind": "m2",
+      "interface": "nvme",
+      "m2Key": "M",
+      "m2Length": 2280,
+      "hybrid": false,
+      "powerW": 7,
+      "goals": ["office", "gaming", "editing"],
+      "verified": true,
+      "source": { "document": "M.2, Wikipedia", "url": "https://en.wikipedia.org/wiki/M.2" }
+    },
+    {
+      "id": "ssd-m2-sata",
+      "name": "SSD M.2 SATA 512 GB Demo",
+      "price": 40,
+      "kind": "m2",
+      "interface": "sata",
+      "m2Key": "B+M",
+      "m2Length": 2280,
+      "hybrid": false,
+      "powerW": 4,
+      "goals": ["office"],
+      "verified": true,
+      "source": { "document": "M.2, Wikipedia", "url": "https://en.wikipedia.org/wiki/M.2", "note": "Key B+M masuk slot key M, tetapi slot harus mendukung SATA." }
+    },
+    {
+      "id": "ssd-sata-25",
+      "name": "SSD SATA 2.5\" 1 TB Demo",
+      "price": 55,
+      "kind": "2.5",
+      "interface": "sata",
+      "hybrid": false,
+      "powerW": 4,
+      "goals": ["office", "gaming"],
+      "verified": false,
+      "source": { "document": "Computer case screws, Wikipedia", "url": "https://en.wikipedia.org/wiki/Computer_case_screws", "note": "Baut M3 untuk drive 2.5\"." }
+    },
+    {
+      "id": "hdd-35",
+      "name": "HDD 3.5\" 2 TB Demo",
+      "price": 50,
+      "kind": "3.5",
+      "interface": "sata",
+      "hybrid": false,
+      "powerW": 8,
+      "goals": ["editing", "office"],
+      "verified": false,
+      "source": { "document": "Computer case screws, Wikipedia", "url": "https://en.wikipedia.org/wiki/Computer_case_screws", "note": "Baut 6-32 UNC untuk HDD 3.5\"." }
+    },
+    {
+      "id": "sshd-25",
+      "name": "SSHD 2.5\" 1 TB Demo",
+      "price": 45,
+      "kind": "2.5",
+      "interface": "sata",
+      "hybrid": true,
+      "powerW": 3,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "SSHD: HDD dengan cache flash; fisik dan konektor sama dengan drive SATA." }
+    }
+  ]
+}

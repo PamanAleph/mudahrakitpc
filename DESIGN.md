@@ -91,19 +91,26 @@ Lucide only, `strokeWidth={1.6}`, 16–18 px in controls, 22 px in the toast. No
 
 ## HUD layout
 
-The canvas is full-bleed. HUD regions hug the edges so the centre stays the work area:
+Two pages share the same tokens and components.
+
+**Planner (`/`)** — a normal scrolling page: sticky header with the four acts; a 3-column grid
+(categories 240 px · options 1fr · summary 340 px) that stacks under 960 px. The summary holds the one
+primary action, **Mulai merakit**, disabled while a blocking issue exists.
+
+**Bench (`/rakit`)** — the canvas is full-bleed; HUD regions hug the edges so the centre stays the work area:
 
 | Region | Content | Notes |
 | --- | --- | --- |
-| Top-left | Brand + mode | |
-| Top-centre | **StepCard**: counter, title, hint, progress bar | The single primary instruction |
-| Top-right | "Langkah" (toggle list), "Ulang" | Icon-only under 640 px |
-| Left (toggle) | StepList: all steps, mistakes, shortcuts, data notice | Open by default ≥ 1360 px |
+| Top-left | Brand | |
+| Top-centre | **TaskCard**: phase · done/total, title, hint, progress bar | The single primary instruction |
+| Top-right | Mode (Terpandu/Bebas), "Tugas" (toggle list), "Ubah rakitan", "Ulang" | Labels hide under 640 px |
+| Left (toggle) | TaskList grouped by phase | Open by default ≥ 1360 px |
 | Right, under the top bar | FeedbackToast | Moves above the dock on phones |
-| Bottom-centre | ToolDock: Tangan / PH0 / PH1 / PH2 · Putar · Taruh · camera | One bar |
-| Pointer | HoverTip (mouse), HoldRing (during holds) | |
+| Bottom-centre | ToolDock: Tangan / PH0 / PH1 / PH2 / Pasta · Putar · Taruh · camera · Manual | One bar |
+| Centre-right (on demand) | Dialogs: paste amount, front panel pins, manual, power-on result | One at a time, Esc closes |
+| Pointer | HoverTip (names the thing; while holding: fits / why not), HoldRing | |
 
-One primary action per moment: the step card says what it is; the scene highlights where.
+One primary action per moment: the task card says what it is; the scene shows where (snap ring).
 
 ## Copy
 
@@ -120,7 +127,10 @@ One primary action per moment: the step card says what it is; the scene highligh
   specs only (e.g. `DDR5 · 288-PIN`).
 - Geometry that carries a fact (notch position, slot pitch, M.2 length) must come from data/layout
   constants, so the picture and the rule can't disagree.
-- Lighting: light-formers + one key light + contact shadows. No HDR downloads, no realtime shadow maps.
+- Lighting: light-formers + one key light + fill/rim lights + contact shadows. No HDR downloads, no realtime shadow maps.
+- Connector footprints follow pin grid × pitch so a 24-pin, an 8-pin EPS, a 12V-2x6 and a SATA plug
+  read as different at a glance. Plugs carry a small tag where real ones are marked ("CPU", "PCIe").
+- The monitor shows a plain firmware summary drawn from the build; no imitation of any real firmware UI.
 - Meaningful highlight colours come from scene tokens; never hard-code green/red in a component.
 
 ## Accessibility
@@ -129,7 +139,8 @@ One primary action per moment: the step card says what it is; the scene highligh
 - All HUD controls are real `<button>`s with visible focus (`:focus-visible` ring).
 - Icon-only buttons have `aria-label`. The canvas has a descriptive `aria-label`.
 - Step card and toast are `aria-live="polite"`.
-- Known gap: scene actions have no keyboard path yet (tools, rotate, drop and camera do).
+- Dialogs take focus on open, return it on close, close on Esc. The front-panel pin grid is real buttons with labels.
+- Known gap: scene actions have no keyboard path yet (tools, rotate, drop, camera, manual and dialogs do).
 
 ## Anti-slop checklist (run before shipping UI)
 

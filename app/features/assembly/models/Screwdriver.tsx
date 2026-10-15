@@ -1,5 +1,5 @@
 import type { Material } from "three";
-import type { BitId } from "../types/hardwareTypes";
+import type { BitId } from "@shared/hardware";
 import { gripGeometry } from "../utils/geometryFactory";
 import { MATERIALS } from "./materials";
 import { Box, Cyl } from "./primitives";

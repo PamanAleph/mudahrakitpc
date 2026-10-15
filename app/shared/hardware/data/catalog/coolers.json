@@ -1,0 +1,53 @@
+{
+  "note": "Cooler udara generik. AIO ditunda ke tahap berikutnya.",
+  "items": [
+    {
+      "id": "cooler-tower-120",
+      "name": "Cooler Tower 120 Demo",
+      "price": 45,
+      "type": "tower",
+      "heightCm": 15.5,
+      "sockets": ["LGA1700", "LGA1851", "AM4", "AM5"],
+      "fanSizeMm": 120,
+      "fanConnector": "fan-4pin",
+      "prePasted": false,
+      "ramClearanceCm": 4.0,
+      "powerW": 3,
+      "goals": ["gaming", "editing"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Intel: posisi lubang LGA1700 dan LGA1851 sama. Watercooling UK: AM4 dan AM5 berbagi jarak lubang." }
+    },
+    {
+      "id": "cooler-low-profile",
+      "name": "Cooler Low-Profile Demo",
+      "price": 40,
+      "type": "low-profile",
+      "heightCm": 4.7,
+      "sockets": ["LGA1700", "LGA1851", "AM4", "AM5"],
+      "fanSizeMm": 92,
+      "fanConnector": "fan-4pin",
+      "prePasted": false,
+      "ramClearanceCm": 99,
+      "powerW": 2,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]" }
+    },
+    {
+      "id": "cooler-stock-amd",
+      "name": "Cooler Bawaan Demo (AM4/AM5)",
+      "price": 15,
+      "type": "stock",
+      "heightCm": 6.0,
+      "sockets": ["AM4", "AM5"],
+      "fanSizeMm": 92,
+      "fanConnector": "fan-3pin",
+      "prePasted": true,
+      "ramClearanceCm": 99,
+      "powerW": 2,
+      "goals": ["office"],
+      "verified": false,
+      "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Pasta sudah terpasang dari pabrik: jangan ditambah." }
+    }
+  ]
+}

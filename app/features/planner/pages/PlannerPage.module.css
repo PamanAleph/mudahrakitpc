@@ -1,0 +1,101 @@
+/* Shop layout: list of categories, the options, and a running receipt. Scrolls as a normal page. */
+.page {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--color-bg-app);
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-hud);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  padding-block: var(--space-3);
+  padding-inline: var(--space-gutter-inline-start) var(--space-gutter-inline-end);
+  background: var(--color-bg-app);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.acts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.actNow {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 340px;
+  gap: var(--space-8);
+  padding-block: var(--space-8) var(--space-12);
+  padding-inline: var(--space-gutter-inline-start) var(--space-gutter-inline-end);
+  align-items: start;
+}
+
+.nav,
+.summary {
+  position: sticky;
+  top: 76px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.note {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.mono {
+  font-family: var(--font-family-data);
+}
+
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  .summary {
+    grid-column: 1 / -1;
+    position: static;
+  }
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    padding-top: var(--space-4);
+  }
+  .nav {
+    position: static;
+  }
+}

@@ -1,4 +1,4 @@
-import type { ElementType, HTMLAttributes, ReactNode } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@shared/utils/cn";
 import styles from "./Surface.module.css";
 
@@ -8,10 +8,10 @@ interface SurfaceProps extends HTMLAttributes<HTMLElement> {
 }
 
 /** The single elevated surface style. Use only where something floats over the 3D scene. */
-export function Surface({ as: Tag = "div", className, children, ...rest }: SurfaceProps) {
+export const Surface = forwardRef<HTMLElement, SurfaceProps>(function Surface({ as: Tag = "div", className, children, ...rest }, ref) {
   return (
-    <Tag className={cn(styles.surface, className)} {...rest}>
+    <Tag ref={ref} className={cn(styles.surface, className)} {...rest}>
       {children}
     </Tag>
   );
-}
+});

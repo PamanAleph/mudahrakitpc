@@ -34,86 +34,6 @@ function rng(seed: number) {
   };
 }
 
-export interface SilkLabel {
-  text: string;
-  /** Board-local x (cm) and z (cm). */
-  x: number;
-  z: number;
-  rotate?: number;
-  size?: number;
-}
-
-/** Solder mask with copper traces and silkscreen labels, mapped to the board's top face. */
-export function pcbTexture(lengthCm: number, widthCm: number, labels: SilkLabel[]): Texture {
-  return memo(`pcb:${lengthCm}:${widthCm}:${labels.length}`, () => {
-    const pxPerCm = 48;
-    const W = Math.round(lengthCm * pxPerCm);
-    const H = Math.round(widthCm * pxPerCm);
-    const { c, ctx } = canvas(W, H);
-    const rand = rng(7);
-
-    ctx.fillStyle = "#1c2421";
-    ctx.fillRect(0, 0, W, H);
-
-    // Copper traces under solder mask: 45° routed bundles.
-    ctx.lineCap = "round";
-    for (let i = 0; i < 220; i++) {
-      ctx.strokeStyle = rand() > 0.5 ? "rgba(52, 72, 63, 0.9)" : "rgba(40, 56, 49, 0.9)";
-      ctx.lineWidth = 1 + rand() * 2;
-      let x = rand() * W;
-      let y = rand() * H;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      const segs = 2 + Math.floor(rand() * 3);
-      for (let k = 0; k < segs; k++) {
-        const len = 20 + rand() * 160;
-        const dir = Math.floor(rand() * 4);
-        if (dir === 0) x += len;
-        else if (dir === 1) y += len;
-        else if (dir === 2) {
-          x += len * 0.7;
-          y += len * 0.7;
-        } else {
-          x += len * 0.7;
-          y -= len * 0.7;
-        }
-        ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    }
-    // Vias.
-    for (let i = 0; i < 900; i++) {
-      ctx.fillStyle = "rgba(150, 160, 150, 0.35)";
-      ctx.beginPath();
-      ctx.arc(rand() * W, rand() * H, 1.4, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Silkscreen.
-    const toPx = (x: number, z: number) => [((x + lengthCm / 2) / lengthCm) * W, ((z + widthCm / 2) / widthCm) * H] as const;
-    ctx.fillStyle = "rgba(225, 230, 226, 0.78)";
-    ctx.textBaseline = "middle";
-    for (const label of labels) {
-      const [px, py] = toPx(label.x, label.z);
-      ctx.save();
-      ctx.translate(px, py);
-      ctx.rotate(label.rotate ?? 0);
-      ctx.font = `500 ${label.size ?? 15}px "IBM Plex Mono", monospace`;
-      ctx.fillText(label.text, 0, 0);
-      ctx.restore();
-    }
-    // Board outline marks in each corner.
-    ctx.strokeStyle = "rgba(225, 230, 226, 0.4)";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(10, 10, W - 20, H - 20);
-
-    const tex = new CanvasTexture(c);
-    tex.colorSpace = SRGBColorSpace;
-    tex.anisotropy = 4;
-    return tex;
-  });
-}
-
 /**
  * Hex-pattern perforation as an alpha map (white = metal, black = hole).
  * Returned per call so each surface can set its own repeat.
@@ -223,6 +143,113 @@ export function matTexture(widthCm: number, depthCm: number): Texture {
     const tex = new CanvasTexture(c);
     tex.colorSpace = SRGBColorSpace;
     tex.anisotropy = 4;
+    return tex;
+  });
+}
+
+export interface BoardLabel {
+  text: string;
+  /** Board-local u (down from the top edge) and v (forward from the rear edge), cm. */
+  u: number;
+  v: number;
+  size?: number;
+  rotate?: number;
+}
+
+/**
+ * Motherboard top face for a plane laid flat over the board (rotation −90° about x):
+ * canvas x runs from u = length (left) to u = 0 (right), canvas y from v = 0 (top) to v = width.
+ */
+export function boardTexture(key: string, lengthCm: number, widthCm: number, labels: BoardLabel[]): Texture {
+  return memo(`board:${key}`, () => {
+    const s = 40;
+    const W = Math.round(lengthCm * s);
+    const H = Math.round(widthCm * s);
+    const { c, ctx } = canvas(W, H);
+    const rand = rng(11);
+    ctx.fillStyle = "#1b2120";
+    ctx.fillRect(0, 0, W, H);
+    ctx.lineCap = "round";
+    for (let i = 0; i < 260; i++) {
+      ctx.strokeStyle = rand() > 0.5 ? "rgba(48, 64, 58, 0.9)" : "rgba(38, 51, 47, 0.9)";
+      ctx.lineWidth = 1 + rand() * 1.6;
+      let x = rand() * W;
+      let y = rand() * H;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      for (let k = 0; k < 3; k++) {
+        const len = 20 + rand() * 140;
+        const d = Math.floor(rand() * 4);
+        if (d === 0) x += len;
+        else if (d === 1) y += len;
+        else if (d === 2) (x += len * 0.7), (y += len * 0.7);
+        else (x += len * 0.7), (y -= len * 0.7);
+        ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    ctx.fillStyle = "rgba(150, 160, 150, 0.3)";
+    for (let i = 0; i < 1100; i++) {
+      ctx.beginPath();
+      ctx.arc(rand() * W, rand() * H, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = "rgba(226, 230, 226, 0.82)";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    for (const l of labels) {
+      ctx.save();
+      ctx.translate((lengthCm - l.u) * s, l.v * s);
+      ctx.rotate(l.rotate ?? 0);
+      ctx.font = `600 ${l.size ?? 13}px "IBM Plex Mono", monospace`;
+      ctx.fillText(l.text, 0, 0);
+      ctx.restore();
+    }
+    ctx.strokeStyle = "rgba(226, 230, 226, 0.35)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(8, 8, W - 16, H - 16);
+    const tex = new CanvasTexture(c);
+    tex.colorSpace = SRGBColorSpace;
+    tex.anisotropy = 4;
+    return tex;
+  });
+}
+
+/** Small embossed-looking text tag for plugs and housings ("CPU", "PCIe", arrows). */
+export function tagTexture(text: string, opts: { dark?: boolean } = {}): Texture {
+  return memo(`tag:${text}:${opts.dark ? 1 : 0}`, () => {
+    const { c, ctx } = canvas(128, 48);
+    ctx.fillStyle = opts.dark ? "#151618" : "#d9d6cd";
+    ctx.fillRect(0, 0, 128, 48);
+    ctx.fillStyle = opts.dark ? "rgba(230, 232, 235, 0.9)" : "#1c1d20";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = '600 30px "IBM Plex Mono", monospace';
+    ctx.fillText(text, 64, 26);
+    const tex = new CanvasTexture(c);
+    tex.colorSpace = SRGBColorSpace;
+    return tex;
+  });
+}
+
+/** Airflow arrow printed on a fan frame or a PSU. */
+export function arrowTexture(): Texture {
+  return memo("arrow", () => {
+    const { c, ctx } = canvas(64, 64);
+    ctx.clearRect(0, 0, 64, 64);
+    ctx.fillStyle = "rgba(235, 237, 240, 0.95)";
+    ctx.beginPath();
+    ctx.moveTo(32, 6);
+    ctx.lineTo(54, 32);
+    ctx.lineTo(40, 32);
+    ctx.lineTo(40, 58);
+    ctx.lineTo(24, 58);
+    ctx.lineTo(24, 32);
+    ctx.lineTo(10, 32);
+    ctx.closePath();
+    ctx.fill();
+    const tex = new CanvasTexture(c);
+    tex.colorSpace = SRGBColorSpace;
     return tex;
   });
 }

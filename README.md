@@ -1,8 +1,18 @@
 # Rakit PC 3D
 
-Simulator merakit PC di browser. Pengguna melakukan sendiri tiap langkah fisik di meja rakit 3D:
-memilih mata obeng yang pas, melepas baut panel, membuka klip RAM, mencocokkan takik, menekan
-sampai terkunci, lalu memasang SSD M.2 dengan bautnya. Setiap kesalahan dijelaskan alasannya.
+Simulator merakit PC di browser, dari belanja sampai menyala:
+
+1. **Pilih komponen** dengan anggaran fiktif: CPU, motherboard, RAM, cooler, VGA, SSD/HDD/SSHD/M.2,
+   casing, kipas, PSU. Setiap pilihan dicek kecocokannya (socket, tipe RAM, ukuran board, panjang VGA,
+   tinggi cooler, daya dan konektor PSU).
+2. **Rakit di atas kotak board**: gelang antistatis, tuas socket, segitiga CPU, pasta termal, plastik
+   cooler, baut cooler, klip dan takik RAM, SSD M.2.
+3. **Rakit di casing**: panel samping, standoff, kipas dan arah alirannya, PSU, board, drive, penutup
+   slot, VGA, dan semua kabel (24-pin, EPS, PCIe/12V-2x6, SATA, kipas, USB, audio, pin front panel).
+4. **Nyalakan**: saklar PSU, tombol power, lampu debug, layar firmware, dan ringkasan.
+
+Setiap kesalahan dijelaskan alasannya. Mode **Terpandu** menolak kesalahan; mode **Bebas** membiarkan
+sebagian lewat dan akibatnya terlihat saat dinyalakan.
 
 ## Menjalankan
 
@@ -11,32 +21,35 @@ npm install
 npm run dev      # buka http://localhost:5173
 ```
 
-Produksi:
+Pemeriksaan dan produksi:
 
 ```bash
-npm run build
+npm run check    # typecheck + uji engine + build
 npm start        # http://localhost:3000
 ```
 
 Butuh Node 20 atau lebih baru.
 
-## Kontrol
+## Kontrol di meja rakit
 
 | Aksi | Cara |
 | --- | --- |
-| Ambil komponen, buka/tutup klip, angkat panel | Klik / ketuk |
-| Memutar baut, menekan RAM/SSD | Tahan klik / tahan sentuh |
+| Ambil komponen atau ujung kabel, buka/tutup klip, tuas, saklar | Klik / ketuk |
+| Pasang yang sedang dipegang | Arahkan sampai lingkaran hijau, lalu klik |
+| Memutar baut, menekan RAM/SSD M.2 | Tahan klik / tahan sentuh |
 | Memutar kamera | Seret area kosong · zoom dengan gulir atau cubit |
-| Putar keping RAM 180° | Tombol **Putar** atau `R` |
-| Taruh kembali komponen | Tombol **Taruh** atau `Esc` |
-| Pilih alat | Bilah bawah atau `0` (tangan), `1`–`3` (PH0–PH2) |
+| Putar 180° (CPU, RAM, kipas, konektor) | Tombol **Putar** atau `R` |
+| Taruh kembali | Tombol **Taruh** atau `Esc` |
+| Pilih alat | Bilah bawah, atau `0` tangan, `1`–`3` PH0–PH2, `4` pasta |
+| Manual board | Tombol **Manual** atau `M` |
 
 ## Dokumen untuk pengembang
 
-- `CLAUDE.md` — arsitektur, aturan impor, konvensi 3D, cara menambah komponen/aturan/langkah.
-- `DESIGN.md` — design token, tipografi, motion, layout HUD, aturan copy.
+- `CLAUDE.md` — arsitektur, aturan impor, cara kerja engine dan scene, cara menambah data/aturan/komponen.
+- `DESIGN.md` — design token, tipografi, motion, layout HUD, aturan copy dan visual 3D.
 
 ## Data yang belum dikonfirmasi
 
-Ukuran mata obeng per baut, posisi takik DDR5, posisi M.2 key dan sudut masuk, serta tata letak
-board dan lubang sekrup ATX masih bertanda `[BELUM DIKONFIRMASI]` di `app/features/assembly/data/`.
+Posisi fitur di board, grid lubang ATX, pitch slot, posisi takik DDR4/DDR5, posisi key M.2, mata obeng
+per baut, ambang cadangan daya PSU, serta harga dan watt fiktif masih bertanda `[BELUM DIKONFIRMASI]`
+di `app/shared/hardware/data/` dan `app/features/assembly/constants/layouts.ts`.

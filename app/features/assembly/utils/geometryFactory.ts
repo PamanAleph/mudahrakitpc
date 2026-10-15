@@ -76,22 +76,6 @@ export function gripGeometry(): LatheGeometry {
   });
 }
 
-/** Shallow magnetic parts dish. */
-export function dishGeometry(radius: number, depth: number): LatheGeometry {
-  return memo(`dish:${radius}:${depth}`, () => {
-    const pts = [
-      new Vector2(0.001, 0),
-      new Vector2(radius * 0.72, 0),
-      new Vector2(radius * 0.9, depth * 0.35),
-      new Vector2(radius, depth),
-      new Vector2(radius * 1.04, depth),
-      new Vector2(radius * 0.94, depth * 0.3),
-      new Vector2(radius * 0.74, 0.04),
-      new Vector2(0.001, 0.04),
-    ];
-    return new LatheGeometry(pts, 40);
-  });
-}
 
 /**
  * DIMM printed circuit board outline: key notch on the contact edge and the

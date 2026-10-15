@@ -4,7 +4,7 @@ import { readAssembly } from "../../store/assemblyStore";
 /** Advances the active hold gesture once per frame. */
 export function HoldController() {
   useFrame((_, dt) => {
-    if (readAssembly().hold) readAssembly().tickHold(Math.min(dt, 0.05));
+    if (readAssembly().hold) readAssembly().tickHold(Math.min(dt, 0.1));
   });
   return null;
 }

@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { formatMessage } from "../../constants/messages";
 import { useAssemblyStore } from "../../store/assemblyStore";
 import styles from "./HoverTip.module.css";
 
-/** Names what's under the mouse: part, spec, state. Mouse only; touch gets it in the toast. */
+/**
+ * Names what's under the mouse. While something is in hand it says whether the
+ * nearest spot fits, and why not, before the user commits.
+ */
 export function HoverTip() {
   const label = useAssemblyStore((s) => s.hover?.label ?? "");
-  const busy = useAssemblyStore((s) => s.hold !== null || s.held !== null);
+  const holding = useAssemblyStore((s) => s.held !== null);
+  const pressing = useAssemblyStore((s) => s.hold !== null);
+  const snap = useAssemblyStore((s) => s.snap);
   const [mouse, setMouse] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -18,9 +24,15 @@ export function HoverTip() {
     return () => window.removeEventListener("pointermove", move);
   }, []);
 
+  let text = label;
+  if (holding) {
+    if (!snap) text = "";
+    else if (snap.valid) text = "Cocok di sini · klik untuk memasang";
+    else text = snap.reason && !snap.reason.ok ? `Tidak bisa: ${formatMessage(snap.reason.key, snap.reason.params).title}` : "Tidak bisa di sini";
+  }
   return (
-    <div ref={ref} className={styles.tip} hidden={!label || !mouse || busy} aria-hidden="true">
-      {label}
+    <div ref={ref} className={styles.tip} data-tone={holding && snap ? (snap.valid ? "ok" : "bad") : undefined} hidden={!text || !mouse || pressing} aria-hidden="true">
+      {text}
     </div>
   );
 }
