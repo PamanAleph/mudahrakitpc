@@ -1,0 +1,27 @@
+{
+  "bits": [
+    { "id": "PH0", "label": "PH0", "order": 0 },
+    { "id": "PH1", "label": "PH1", "order": 1 },
+    { "id": "PH2", "label": "PH2", "order": 2 }
+  ],
+  "screws": [
+    {
+      "id": "thumbscrew-6-32",
+      "name": "Baut panel samping",
+      "thread": "6-32 UNC",
+      "head": "thumbscrew-phillips",
+      "bit": "PH2",
+      "turnsToRemove": 6
+    },
+    {
+      "id": "m2-screw",
+      "name": "Baut M.2",
+      "thread": "M2",
+      "head": "pan-phillips",
+      "bit": "PH1",
+      "turnsToRemove": 4
+    }
+  ],
+  "verified": false,
+  "source": { "document": "[BELUM DIKONFIRMASI]", "note": "Ukuran mata obeng untuk tiap baut perlu dicek ke manual casing dan board." }
+}

@@ -1,0 +1,59 @@
+import { DoubleSide, MeshPhysicalMaterial, MeshStandardMaterial } from "three";
+
+/**
+ * Shared materials for every part model. Visual layer only: colours here are
+ * believable finishes, never brand colours. One instance each, reused.
+ */
+const std = (color: string, metalness: number, roughness: number, extra: Partial<MeshStandardMaterial> = {}) =>
+  Object.assign(new MeshStandardMaterial({ color, metalness, roughness }), extra);
+
+export const MATERIALS = {
+  caseSteel: std("#25272b", 0.55, 0.45),
+  caseSteelInner: std("#2d3035", 0.5, 0.55),
+  caseSteelPerforated: std("#25272b", 0.55, 0.45, { alphaTest: 0.5, side: DoubleSide }),
+  bezelPlastic: std("#1b1c1f", 0.05, 0.6),
+  meshGrille: std("#2b2e33", 0.6, 0.5, { alphaTest: 0.5, side: DoubleSide }),
+  rubber: std("#141518", 0, 0.92),
+  fanFrame: std("#1d1e22", 0.05, 0.55),
+  fanBlade: std("#26282d", 0.05, 0.45),
+
+  glass: new MeshPhysicalMaterial({
+    color: "#1c2026",
+    metalness: 0,
+    roughness: 0.04,
+    transparent: true,
+    opacity: 0.4,
+    depthWrite: false,
+    envMapIntensity: 1.6,
+    clearcoat: 1,
+    clearcoatRoughness: 0.05,
+  }),
+  glassFrit: std("#0e0f11", 0, 0.5),
+
+  pcbEdge: std("#1a201e", 0.1, 0.7),
+  slotBlack: std("#1a1b1e", 0.05, 0.55),
+  slotGrey: std("#585c63", 0.05, 0.5),
+  latch: std("#c8cbd1", 0.05, 0.42),
+  connectorWhite: std("#e7e4dc", 0.02, 0.5),
+  heatsink: std("#3a3e45", 0.7, 0.38),
+  heatsinkAccent: std("#8d939b", 0.85, 0.3),
+  aluminium: std("#a7adb4", 0.85, 0.32),
+  chrome: std("#d4d7dc", 1, 0.18),
+  steelBright: std("#b8bcc2", 0.9, 0.28),
+  brass: std("#c9a35b", 0.85, 0.32),
+  gold: std("#d8b25a", 0.95, 0.25),
+  chip: std("#141517", 0.2, 0.48),
+  chipMarking: std("#202226", 0.2, 0.4),
+  choke: std("#4a4d52", 0.5, 0.5),
+  capacitor: std("#9da2a9", 0.85, 0.3),
+  capacitorTop: std("#2a2c30", 0.6, 0.4),
+  ramPcb: std("#1e5b43", 0.1, 0.55),
+  ramSpreader: std("#2f3237", 0.75, 0.35),
+  ssdPcb: std("#14181d", 0.1, 0.5),
+  traySurface: std("#4a4d53", 0.05, 0.7),
+  dish: std("#9fa4ab", 0.85, 0.3, { side: DoubleSide }),
+  pin: std("#d8b25a", 0.95, 0.25),
+  knurl: std("#b8bcc2", 0.9, 0.3, { flatShading: true }),
+  gripRubber: std("#16171a", 0, 0.85),
+  handleGrip: std("#2346c8", 0.05, 0.55, { flatShading: true }),
+} as const;

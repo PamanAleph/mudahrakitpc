@@ -1,0 +1,14 @@
+.tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-inner);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  font-family: var(--font-family-data);
+  font-size: var(--font-size-caption);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: var(--layer-tooltip);
+}

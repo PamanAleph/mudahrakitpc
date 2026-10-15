@@ -1,0 +1,189 @@
+/*
+ * Design tokens — three layers.
+ *
+ * 1. Primitive  (--prim-*)   raw values. Never used directly by components.
+ * 2. Semantic   (--color-*, --space-*, --radius-*, --font-*, --motion-*)
+ *                            what a value MEANS. Components use only these.
+ * 3. Scene      (--scene-*)  semantic colors read by the 3D layer through useCssTokens().
+ *
+ * Dark theme redefines semantic tokens only. Primitives stay the same.
+ * See DESIGN.md for usage rules.
+ */
+
+:root {
+  /* ---------- 1. Primitives ---------- */
+  --prim-neutral-0: #ffffff;
+  --prim-neutral-25: #fafaf8;
+  --prim-neutral-50: #f3f2ef;
+  --prim-neutral-100: #e8e7e2;
+  --prim-neutral-150: #e3e2dd;
+  --prim-neutral-200: #d9d7d1;
+  --prim-neutral-300: #bdbab2;
+  --prim-neutral-500: #85878d;
+  --prim-neutral-600: #5b5e64;
+  --prim-neutral-700: #3f4247;
+  --prim-neutral-800: #2a2c30;
+  --prim-neutral-850: #25262a;
+  --prim-neutral-900: #18191b;
+  --prim-neutral-950: #111214;
+
+  --prim-blue-50: #e9edfa;
+  --prim-blue-300: #8ea5ff;
+  --prim-blue-600: #2346c8;
+  --prim-blue-700: #18318f;
+  --prim-blue-900: #283053;
+  --prim-blue-950: #12152a;
+
+  --prim-green-400: #5ecb88;
+  --prim-green-500: #2fb463;
+  --prim-green-600: #17803f;
+  --prim-red-400: #ff8b74;
+  --prim-red-500: #e0533d;
+  --prim-red-600: #b8321f;
+
+  --prim-ash-300: #cbc6bb;
+  --prim-ash-700: #3b3934;
+  --prim-slate-700: #2f3540;
+  --prim-slate-900: #1d2128;
+
+  /* ---------- 2. Semantic: color ---------- */
+  --color-bg-app: var(--prim-neutral-150);
+  --color-surface-default: var(--prim-neutral-25);
+  --color-surface-sunken: var(--prim-neutral-50);
+  --color-surface-inverse: var(--prim-neutral-900);
+
+  --color-text-primary: var(--prim-neutral-900);
+  --color-text-secondary: var(--prim-neutral-600);
+  --color-text-inverse: var(--prim-neutral-25);
+  --color-text-accent: var(--prim-blue-600);
+
+  --color-border-subtle: var(--prim-neutral-200);
+  --color-border-strong: var(--prim-neutral-500);
+
+  --color-action-primary-bg: var(--prim-blue-600);
+  --color-action-primary-bg-hover: var(--prim-blue-700);
+  --color-action-primary-fg: var(--prim-neutral-0);
+  --color-action-selected-bg: var(--prim-neutral-900);
+  --color-action-selected-fg: var(--prim-neutral-25);
+  --color-focus-ring: var(--prim-blue-600);
+
+  --color-feedback-info: var(--prim-blue-600);
+  --color-feedback-success: var(--prim-green-600);
+  --color-feedback-danger: var(--prim-red-600);
+
+  --shadow-raised: 0 4px 18px rgb(24 25 27 / 0.1);
+
+  /* ---------- 3. Scene (3D) ---------- */
+  --scene-backdrop: var(--prim-neutral-150);
+  --scene-desk: var(--prim-ash-300);
+  --scene-mat: var(--prim-slate-700);
+  --scene-snap-valid: var(--prim-green-500);
+  --scene-snap-invalid: var(--prim-red-500);
+  --scene-accent: var(--prim-blue-600);
+
+  /* ---------- Semantic: space (4px base) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-gutter-inline-start: max(var(--space-4), env(safe-area-inset-left, 0px));
+  --space-gutter-inline-end: max(var(--space-4), env(safe-area-inset-right, 0px));
+  --space-gutter-block-start: max(var(--space-3), env(safe-area-inset-top, 0px));
+  --space-gutter-block-end: max(var(--space-4), env(safe-area-inset-bottom, 0px));
+
+  /* ---------- Semantic: shape ---------- */
+  --radius-control: 8px; /* the one radius token, used everywhere */
+  --radius-inner: 6px; /* control nested inside a radius-control container (8 - 2px padding) */
+  --size-touch-min: 44px;
+  --size-control: 40px;
+
+  /* ---------- Semantic: type ---------- */
+  --font-family-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-family-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-size-caption: 12px;
+  --font-size-body: 14px;
+  --font-size-title: 16px;
+  --font-size-display: 22px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --line-height-tight: 1.25;
+  --line-height-body: 1.5;
+  --letter-spacing-data: 0.02em;
+
+  /* ---------- Semantic: motion (2 curves only) ---------- */
+  --motion-duration-fast: 160ms;
+  --motion-duration-base: 240ms;
+  --motion-duration-slow: 480ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --motion-ease-emphasized: cubic-bezier(0.34, 1.4, 0.5, 1);
+
+  /* ---------- Semantic: layering ---------- */
+  --layer-hud: 10;
+  --layer-tooltip: 20;
+  --layer-overlay: 30;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg-app: var(--prim-neutral-950);
+    --color-surface-default: var(--prim-neutral-850);
+    --color-surface-sunken: var(--prim-neutral-800);
+    --color-surface-inverse: var(--prim-neutral-100);
+    --color-text-primary: var(--prim-neutral-100);
+    --color-text-secondary: var(--prim-neutral-300);
+    --color-text-inverse: var(--prim-neutral-900);
+    --color-text-accent: var(--prim-blue-300);
+    --color-border-subtle: #3a3b41;
+    --color-border-strong: var(--prim-neutral-500);
+    --color-action-primary-bg: var(--prim-blue-300);
+    --color-action-primary-bg-hover: #a9bbff;
+    --color-action-primary-fg: var(--prim-blue-950);
+    --color-action-selected-bg: var(--prim-neutral-100);
+    --color-action-selected-fg: var(--prim-neutral-900);
+    --color-focus-ring: var(--prim-blue-300);
+    --color-feedback-info: var(--prim-blue-300);
+    --color-feedback-success: var(--prim-green-400);
+    --color-feedback-danger: var(--prim-red-400);
+    --shadow-raised: 0 4px 18px rgb(0 0 0 / 0.35);
+    --scene-backdrop: #1b1c1f;
+    --scene-desk: var(--prim-ash-700);
+    --scene-mat: var(--prim-slate-900);
+    --scene-accent: var(--prim-blue-300);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg-app: var(--prim-neutral-950);
+  --color-surface-default: var(--prim-neutral-850);
+  --color-surface-sunken: var(--prim-neutral-800);
+  --color-surface-inverse: var(--prim-neutral-100);
+  --color-text-primary: var(--prim-neutral-100);
+  --color-text-secondary: var(--prim-neutral-300);
+  --color-text-inverse: var(--prim-neutral-900);
+  --color-text-accent: var(--prim-blue-300);
+  --color-border-subtle: #3a3b41;
+  --color-border-strong: var(--prim-neutral-500);
+  --color-action-primary-bg: var(--prim-blue-300);
+  --color-action-primary-bg-hover: #a9bbff;
+  --color-action-primary-fg: var(--prim-blue-950);
+  --color-action-selected-bg: var(--prim-neutral-100);
+  --color-action-selected-fg: var(--prim-neutral-900);
+  --color-focus-ring: var(--prim-blue-300);
+  --color-feedback-info: var(--prim-blue-300);
+  --color-feedback-success: var(--prim-green-400);
+  --color-feedback-danger: var(--prim-red-400);
+  --shadow-raised: 0 4px 18px rgb(0 0 0 / 0.35);
+  --scene-backdrop: #1b1c1f;
+  --scene-desk: var(--prim-ash-700);
+  --scene-mat: var(--prim-slate-900);
+  --scene-accent: var(--prim-blue-300);
+  color-scheme: dark;
+}

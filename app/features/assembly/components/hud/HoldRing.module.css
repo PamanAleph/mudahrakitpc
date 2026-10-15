@@ -1,0 +1,27 @@
+.ring {
+  position: fixed;
+  left: -24px;
+  top: -24px;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: var(--layer-tooltip);
+}
+
+.track,
+.fill {
+  fill: none;
+  stroke-width: 4;
+}
+
+.track {
+  stroke: var(--color-surface-default);
+  opacity: 0.85;
+}
+
+.fill {
+  stroke: var(--color-action-primary-bg);
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 24px 24px;
+}

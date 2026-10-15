@@ -1,0 +1,42 @@
+{
+  "name": "pc-simulator",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
+    "start": "remix-serve ./build/server/index.js",
+    "typecheck": "tsc",
+    "check": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.2.7",
+    "@fontsource/ibm-plex-sans": "5.2.8",
+    "@react-three/drei": "9.122.0",
+    "@react-three/fiber": "8.18.0",
+    "@remix-run/node": "2.17.5",
+    "@remix-run/react": "2.17.5",
+    "@remix-run/serve": "2.17.5",
+    "isbot": "5.2.2",
+    "lucide-react": "0.468.0",
+    "maath": "0.10.8",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "three": "0.170.0",
+    "zod": "3.25.76",
+    "zustand": "5.0.15"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "2.17.5",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@types/three": "0.170.0",
+    "typescript": "5.9.3",
+    "vite": "6.4.4",
+    "vite-tsconfig-paths": "5.1.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

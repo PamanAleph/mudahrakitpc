@@ -1,0 +1,63 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  flex: 1 1 320px;
+  max-width: 580px;
+}
+
+.body {
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  animation: enter var(--motion-duration-slow) var(--motion-ease-standard);
+}
+
+.counter {
+  font-family: var(--font-family-data);
+  font-size: var(--font-size-caption);
+  letter-spacing: var(--letter-spacing-data);
+  color: var(--color-text-accent);
+}
+
+.title {
+  margin: 2px 0;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.count {
+  font-family: var(--font-family-data);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.hint {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-text-secondary);
+}
+
+.progress {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: var(--color-surface-sunken);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-action-primary-bg);
+  transform-origin: left center;
+  transition: transform var(--motion-duration-slow) var(--motion-ease-emphasized);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

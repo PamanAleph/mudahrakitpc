@@ -1,0 +1,42 @@
+.poster {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg-app);
+}
+
+.mat {
+  width: min(60vw, 520px);
+  aspect-ratio: 86 / 68;
+  max-width: 100%;
+  border-radius: var(--radius-control);
+  background: var(--color-surface-sunken);
+  display: grid;
+  place-items: center;
+  transform: perspective(900px) rotateX(48deg);
+}
+
+.case {
+  width: 54%;
+  aspect-ratio: 46 / 44;
+  border-radius: var(--radius-control);
+  border: 2px solid var(--color-border-strong);
+  animation: breathe 1.6s var(--motion-ease-standard) infinite alternate;
+}
+
+.label {
+  position: absolute;
+  bottom: 30%;
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+@keyframes breathe {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,131 @@
+/* Full-bleed 3D bench; HUD regions hug the edges and never cover the work area's centre. */
+.app {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+.stage canvas {
+  touch-action: none;
+}
+
+.top,
+.side,
+.feedback,
+.dock {
+  position: absolute;
+  z-index: var(--layer-hud);
+  pointer-events: none;
+}
+
+.top > *,
+.side > *,
+.feedback > *,
+.dock > * {
+  pointer-events: auto;
+}
+
+.top {
+  top: var(--space-gutter-block-start);
+  left: 0;
+  right: 0;
+  padding-inline: var(--space-gutter-inline-start) var(--space-gutter-inline-end);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.brand {
+  height: var(--size-control);
+  padding: 0 var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.brandName {
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.brandMode {
+  font-family: var(--font-family-data);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.side {
+  left: var(--space-gutter-inline-start);
+  top: 148px;
+  bottom: 96px;
+  display: flex;
+  align-items: flex-start;
+  animation: slide-in var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.feedback {
+  right: var(--space-gutter-inline-end);
+  top: calc(var(--space-gutter-block-start) + 148px);
+  width: min(380px, calc(100% - 32px));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dock {
+  left: 50%;
+  bottom: var(--space-gutter-block-end);
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+}
+
+@media (max-width: 640px) {
+  .brandMode,
+  .actionLabel {
+    display: none;
+  }
+  .actions > button {
+    width: var(--size-touch-min);
+    padding: 0;
+  }
+  .top > section {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .feedback {
+    top: auto;
+    left: var(--space-gutter-inline-start);
+    right: var(--space-gutter-inline-end);
+    width: auto;
+    bottom: calc(var(--space-gutter-block-end) + 112px);
+  }
+  .side {
+    left: var(--space-gutter-inline-start);
+    right: var(--space-gutter-inline-end);
+    top: 180px;
+  }
+}
