@@ -47,8 +47,8 @@ export function SocketModel({ fx, fz, loadingPlate, leverRef, plateRef }: Socket
         </>
       ) : null}
       <group ref={leverRef} position={[-leverLen / 2, 0.15, fz / 2 + 1.0]}>
-        <Cyl radius={0.08} height={leverLen} rotation={[0, 0, Math.PI / 2]} position={[leverLen / 2, 0, 0]} material={MATERIALS.steelBright} segments={10} />
-        <Box size={[0.2, 0.2, 0.55]} position={[leverLen, 0, -0.2]} material={MATERIALS.steelBright} />
+        <Cyl radius={0.13} height={leverLen} rotation={[0, 0, Math.PI / 2]} position={[leverLen / 2, 0, 0]} material={MATERIALS.steelBright} segments={10} />
+        <Box size={[0.32, 0.32, 0.8]} position={[leverLen, 0, -0.3]} material={MATERIALS.steelBright} />
       </group>
     </group>
   );

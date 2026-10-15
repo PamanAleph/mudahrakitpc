@@ -5,6 +5,7 @@ import { CameraDirector } from "./CameraDirector";
 import { CaseRig } from "./CaseRig";
 import { DeskRig } from "./DeskRig";
 import { DevBridge } from "./DevBridge";
+import { GuideLayer } from "./GuideLayer";
 import { HoldController } from "./HoldController";
 import { PartRig } from "./PartRig";
 import { PulseLayer } from "./PulseLayer";
@@ -33,6 +34,7 @@ export function AssemblyScene() {
       <SnapController />
       <SnapIndicator />
       <HoldController />
+      <GuideLayer />
       <PulseLayer colors={{ info: t["--color-feedback-info"], success: t["--scene-snap-valid"], danger: t["--scene-snap-invalid"] }} />
       {import.meta.env.DEV ? <DevBridge /> : null}
     </>

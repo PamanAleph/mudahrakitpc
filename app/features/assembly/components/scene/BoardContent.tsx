@@ -109,8 +109,8 @@ function Socket({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
       <SocketModel fx={x} fz={z} loadingPlate={lga} leverRef={lever} plateRef={plate} />
-      <mesh {...handlers} position={[0, 0.4, z / 2 + 1.0]}>
-        <boxGeometry args={[x + 2, 1.4, 1.4]} />
+      <mesh {...handlers} position={[0, 0.5, z / 2 + 0.9]}>
+        <boxGeometry args={[x + 2.4, 1.8, 2.4]} />
         <meshBasicMaterial visible={false} />
       </mesh>
     </group>

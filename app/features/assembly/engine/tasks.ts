@@ -2,6 +2,7 @@ import type { ResolvedBuild } from "@shared/hardware";
 import type { CaseGeometry } from "../constants/layouts";
 import type { AssemblySnapshot, CableSpec, PartInstance, PhaseId, TaskDefinition } from "../types/assemblyTypes";
 import { FP_EXPECTED, fpCorrect } from "./frontPanel";
+import { deriveGuides } from "./guide";
 import { cableSatisfied, isMounted, panelOff, recommendedRamSlots, requiredCovers, standoffDiff } from "./selectors";
 
 export const PHASES: Array<{ id: PhaseId; label: string }> = [
@@ -84,6 +85,9 @@ export function deriveTasks(b: ResolvedBuild, parts: PartInstance[], cables: Cab
   add("power", "panel-on", "Pasang kembali panel samping", "Letakkan panel di atas casing, lalu kencangkan bautnya.", "caseInside", (s) => s.parts.panel?.location === "mounted" && (s.parts.panel?.fastened ?? 0) >= 1 && s.parts.board?.mount === "case-board");
   add("power", "psu-switch", "Nyalakan saklar PSU", "Putar kamera ke belakang casing dan klik saklar PSU ke posisi I.", "rear", (s) => s.psuSwitch);
   add("power", "power", "Tekan tombol power", "Tombol power ada di sisi atas casing, dekat bagian depan (casing sedang rebah, jadi sisi atasnya menghadap ke kanan).", "power", (s) => !!s.post?.booted);
+
+  const guides = deriveGuides(b, parts, cables, geometry);
+  for (const task of t) task.guide = guides[task.id];
   return t;
 }
 

@@ -20,6 +20,8 @@ export const runtime = {
   ports: new Map<string, Object3D>(),
   /** Named anchors: "cable:<partId>:<anchor>", "grommet:<id>", "fp-header"… */
   anchors: new Map<string, Object3D>(),
+  /** Everything the user can click, by its `useInteractive` id. Lets the guide point at it. */
+  interactives: new Map<string, Object3D>(),
 };
 
 export function setCameraControlsEnabled(enabled: boolean): void {

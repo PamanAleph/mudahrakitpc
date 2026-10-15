@@ -160,6 +160,11 @@ export const MESSAGES = {
   "board.placed": { tone: "success", title: "Board di atas standoff", body: "Lubang board sejajar dengan standoff dan port belakang masuk ke bukaan I/O. Sekarang pasang bautnya." },
   "board.picked": { tone: "info", title: "Board diangkat", body: "Pegang dari tepi. Miringkan ke arah panel belakang dan turunkan ke atas standoff." },
   "board.ioShield": { tone: "info", title: "Catatan I/O shield", body: "Board ini tidak punya I/O shield terpasang. Di casing nyata, shield dipasang dulu di panel belakang sebelum board." },
+  "board.notYet": {
+    tone: "info",
+    title: "Board tetap di kotaknya dulu",
+    body: "CPU, cooler, RAM, dan SSD M.2 dipasang saat board masih di meja. Board baru diangkat ke casing setelah panel samping dilepas. Untuk tuas socket, klik tuas logamnya (yang berkedip), bukan papan board.",
+  },
   "board.locked": { tone: "info", title: "Board sudah di casing", body: "Komponen di board sekarang dikerjakan di dalam casing." },
   "drive.wrongBay": { tone: "danger", title: "Bay tidak cocok", body: "Drive ini {kind}\", bay ini untuk {bay}\"." },
   "drive.placed": { tone: "info", title: "Drive di bay", body: "Kencangkan bautnya ({screw})." },

@@ -154,5 +154,16 @@ check(S().feedback?.title === "Mata PH1 terlalu kecil", "wrong bit refused");
 S().pressPower();
 check(S().post?.powered === false, "no power with PSU absent");
 
+// The board is not a handle for the socket lever: guided mode refuses to lift it before the panel is off
+S().init(build);
+S().toggleStrap();
+S().pickPart("board");
+check(S().held === null && S().feedback?.title === "Board tetap di kotaknya dulu", "board stays in its box while working on the bench");
+// Every task says how to do its next step, and the first one points at the lever
+check(S().tasks.every((t) => typeof t.guide === "function"), "every task has a guide");
+S().toggleStrap();
+check(S().tasks.find((t) => t.id === "lever-open")?.guide?.(S())?.target === "lever", "lever task points at the lever");
+check(S().tasks.find((t) => t.id === "cpu")?.guide?.(S())?.spot === "socket", "cpu task points at the socket");
+
 console.log(failures ? `\n${failures} failure(s)` : "\nALL OK");
 process.exit(failures ? 1 : 0);

@@ -1,6 +1,7 @@
 import type { ThreeEvent } from "@react-three/fiber";
 import { useCursor } from "@react-three/drei";
 import { useCallback, useRef, useState } from "react";
+import type { Object3D } from "three";
 import { DRAG_THRESHOLD_PX, TAP_MAX_MS } from "../constants/timings";
 import { readAssembly } from "../store/assemblyStore";
 import type { Anchor, HoldDefinition } from "../types/assemblyTypes";
@@ -121,7 +122,17 @@ export function useInteractive({ id, label, enabled = true, anchor, getHold, onT
     },
   };
 
-  // No handlers at all while disabled, so the object stops catching rays
+  // Registered even while disabled: the guide points at things by id, and the
+  // ref is not an event handler, so it never makes the object catch rays.
+  const ref = useCallback(
+    (o: Object3D | null) => {
+      if (o) runtime.interactives.set(id, o);
+      else runtime.interactives.delete(id);
+    },
+    [id],
+  );
+
+  // No event handlers at all while disabled, so the object stops catching rays
   // (lets taps fall through to whatever is behind it, or to onPointerMissed).
-  return { hovered: hovered && enabled, handlers: enabled ? handlers : {} };
+  return { hovered: hovered && enabled, handlers: enabled ? { ...handlers, ref } : { ref } };
 }

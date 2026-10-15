@@ -157,6 +157,26 @@ export interface TaskDefinition {
   hint: string;
   view: ViewId;
   isDone: (s: AssemblySnapshot) => boolean;
+  /** The very next physical action for this task, given the bench right now. */
+  guide?: (s: AssemblySnapshot) => GuideStep | null;
+}
+
+/**
+ * tap = one click; hold = press and keep pressing; carry = click a part to pick
+ * it up, move it, click again to place it.
+ */
+export type GuideGesture = "tap" | "hold" | "carry";
+
+export interface GuideStep {
+  gesture: GuideGesture;
+  /** Interactive object to touch (registered by `useInteractive`). Absent for a pure placement click. */
+  target?: string;
+  /** Mount / port / anchor id where a carried part goes, or where a placement click lands. */
+  spot?: string;
+  /** Tool to select first, when the step needs one. */
+  tool?: ToolId;
+  /** Plain-Indonesian instruction for exactly this step. */
+  how: string;
 }
 
 export type ViewId = "overview" | "bench" | "socket" | "caseInside" | "caseLower" | "rear" | "frontPanel" | "power" | "monitor";

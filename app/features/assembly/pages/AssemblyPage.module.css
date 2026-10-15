@@ -92,7 +92,7 @@
 
 .side {
   left: var(--space-gutter-inline-start);
-  top: 148px;
+  top: 196px;
   bottom: 96px;
   display: flex;
   align-items: flex-start;

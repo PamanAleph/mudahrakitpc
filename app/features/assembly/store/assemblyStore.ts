@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { useShallow } from "zustand/react/shallow";
 import { FASTENERS, getScrew, type ResolvedBuild } from "@shared/hardware";
 import { formatMessage, type MessageKey } from "../constants/messages";
 import { caseGeometry, type CaseGeometry } from "../constants/layouts";
@@ -57,7 +58,10 @@ interface AssemblyState extends AssemblySnapshot {
   viewNonce: number;
   overlay: Overlay;
   fpSelected: FrontPanelPlugId | null;
+  /** The animated "show me how" for the current task is playing. */
+  demo: boolean;
 
+  setDemo: (on: boolean) => void;
   init: (build: ResolvedBuild) => void;
   reset: () => void;
   setMode: (mode: Mode) => void;
@@ -162,7 +166,9 @@ export const useAssemblyStore = create<AssemblyState>()((set, get) => {
     viewNonce: 0,
     overlay: null,
     fpSelected: null,
+    demo: false,
 
+    setDemo: (demo) => set({ demo }),
     init: (build) => {
       holdRegistry.clear();
       const instances = derivePartInstances(build);
@@ -202,6 +208,7 @@ export const useAssemblyStore = create<AssemblyState>()((set, get) => {
         shakes: {},
         overlay: null,
         fpSelected: null,
+        demo: false,
       });
       set((s) => ({ view: "overview", viewNonce: s.viewNonce + 1 }));
     },
@@ -384,6 +391,8 @@ export const useAssemblyStore = create<AssemblyState>()((set, get) => {
       if (st.location === "mounted") {
         if (p.kind === "board") {
           if (st.mount === "case-board") return s.notify("board.locked");
+          // Stray clicks on the board (aiming at its socket, latches or lever) must not lift it.
+          if (s.mode === "guided" && !panelOff(s)) return s.notify("board.notYet");
         } else if (p.kind === "ram") {
           if (st.stage === "seated") return s.notify("ram.alreadySeated");
         } else if (p.kind === "m2") {
@@ -654,4 +663,14 @@ export const readAssembly = () => useAssemblyStore.getState();
 
 export function useCurrentTask() {
   return useAssemblyStore((s) => (s.ready ? currentTask(s.tasks, s) : null));
+}
+
+/** The next physical action of the current task. Flat primitives, so shallow equality holds. */
+export function useCurrentGuide() {
+  return useAssemblyStore(
+    useShallow((s) => {
+      const g = s.ready ? currentTask(s.tasks, s)?.guide?.(s) : null;
+      return { gesture: g?.gesture ?? null, tool: g?.tool ?? null, how: g?.how ?? "" };
+    }),
+  );
 }

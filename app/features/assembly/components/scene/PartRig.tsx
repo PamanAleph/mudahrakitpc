@@ -1,6 +1,6 @@
 import { useFrame, type RootState } from "@react-three/fiber";
 import { easing } from "maath";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { Euler, Quaternion, Vector3, type Group } from "three";
 import { getScrew } from "@shared/hardware";
 import { DAMP } from "@shared/constants/motion";
@@ -32,18 +32,27 @@ const pointer = new Vector3();
  * including reversals, animates without extra code.
  */
 export function PartRig({ inst }: { inst: PartInstance }) {
-  const group = useRef<Group>(null);
+  const group = useRef<Group | null>(null);
   const first = useRef(true);
   const location = useAssemblyStore((s) => s.parts[inst.id]?.location ?? "tray");
   const target = useRef({ pos: new Vector3(), quat: new Quaternion() });
 
-  const { handlers } = useInteractive({
+  const {
+    handlers: { ref: registerInteractive, ...events },
+  } = useInteractive({
     id: inst.id,
     enabled: location !== "held",
     label: () => describe(inst),
     getHold: () => holdFor(inst),
     onTap: () => tapPart(inst),
   });
+  const setGroup = useCallback(
+    (g: Group | null) => {
+      group.current = g;
+      registerInteractive(g);
+    },
+    [registerInteractive],
+  );
 
   useFrame((state, dt) => {
     const g = group.current;
@@ -66,7 +75,7 @@ export function PartRig({ inst }: { inst: PartInstance }) {
   });
 
   return (
-    <group ref={group} {...handlers}>
+    <group ref={setGroup} {...events}>
       <PartContent inst={inst} />
     </group>
   );
